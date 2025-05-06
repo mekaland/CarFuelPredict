@@ -37,9 +37,10 @@ if uploaded_file is not None:
     st.write(data.isna().sum())
 
     # Eksik değerlerin işlenmesi
+    # Önce sayısal değere dönüştürün, hataları NaN olarak işleyin
+    data["Horsepower"] = pd.to_numeric(data["Horsepower"], errors='coerce')
+    # Şimdi güvenle ortalama alabilir ve NaN değerleri doldurabilirsiniz
     data["Horsepower"] = data["Horsepower"].fillna(data["Horsepower"].mean())
-    st.write("### Eksik Değerler Doldurulduktan Sonra")
-    st.write(data.isna().sum())
 
     # Keşifsel Veri Analizi (EDA)
     st.header("2. Keşifsel Veri Analizi (EDA)")
